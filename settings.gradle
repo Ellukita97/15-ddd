@@ -1,0 +1,10 @@
+rootProject.name = 'building-blocks'
+
+include ':shared:domain'
+
+project(':shared:domain').projectDir = file('./src/shared/src/domain')
+
+include ':actions-and-shifts-manager:domain'
+
+project(':actions-and-shifts-manager:domain').projectDir = file('./src/actions-and-shifts-manager/src/domain')
+
