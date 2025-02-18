@@ -8,6 +8,7 @@ import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.events.*;
 import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.values.AmountPoints;
 import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.values.PlayerPhaseId;
 import com.buildingblocks.shared.domain.generic.AggregateRoot;
+import com.buildingblocks.shared.domain.generic.DomainEvent;
 
 import java.util.List;
 
@@ -17,8 +18,9 @@ public class PlayerPhase extends AggregateRoot<PlayerPhaseId> {
     private AmountPoints amountPoints;
 
     //region Contructors
-    private PlayerPhase() {
+    public PlayerPhase() {
         super(new PlayerPhaseId());
+        subscribe(new PlayerPhaseHandler(this));
     }
 
     private PlayerPhase(PlayerPhaseId identity) {
@@ -75,6 +77,13 @@ public class PlayerPhase extends AggregateRoot<PlayerPhaseId> {
 
     public void playerChanged(String id, String name) {
         apply(new PlayerChanged(id, name));
+    }
+
+    public static PlayerPhase from(final String identity, final List<DomainEvent> events) {
+        PlayerPhase playerPhase = new PlayerPhase(PlayerPhaseId.of(identity));
+
+        events.forEach(playerPhase::apply);
+        return playerPhase;
     }
 
     //endregion
