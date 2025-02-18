@@ -1,24 +1,25 @@
 package com.buildingblocks.actionsandshiftsmanager.domain.movement.entities;
 
 import com.buildingblocks.actionsandshiftsmanager.domain.movement.values.PlaceId;
+import com.buildingblocks.actionsandshiftsmanager.domain.movement.values.Type;
 import com.buildingblocks.shared.domain.generic.Entity;
 
 public class Place extends Entity<PlaceId> {
 
-    private String type;
+    private Type type;
     private int diseaseLevel;
 
-    public Place(String type, int diseaseLevel) {
+    public Place(Type type, int diseaseLevel) {
         super(new PlaceId());
         canGo(type,diseaseLevel);
     }
 
-    public Place(PlaceId identity, String type, int diseaseLevel) {
+    public Place(PlaceId identity, Type type, int diseaseLevel) {
         super(identity);
         canGo(type,diseaseLevel);
     }
 
-    public void canGo(String type, int diseaseLevel) {
+    public void canGo(Type type, int diseaseLevel) {
         if (diseaseLevel <= 3) {
             throw new Error("the disease level is very high, cant go");
         }else {
@@ -27,7 +28,7 @@ public class Place extends Entity<PlaceId> {
         }
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 

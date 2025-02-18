@@ -1,21 +1,24 @@
 package com.buildingblocks.actionsandshiftsmanager.domain.playerphase.entities;
 
+import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.values.Action;
 import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.values.CardId;
+import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.values.Name;
+import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.values.Type;
 import com.buildingblocks.shared.domain.generic.Entity;
 
 public class Card extends Entity<CardId> {
-    private String name;
-    private String type;
-    private String action;
+    private Name name;
+    private Type type;
+    private Action action;
 
-    public Card( String name, String type, String action) {
+    public Card( Name name, Type type, Action action) {
         super(new CardId());
         this.name = name;
         this.type = type;
         this.action = action;
     }
 
-    public Card(CardId identity, String name, String type, String action) {
+    public Card(CardId identity, Name name, Type type, Action action) {
         super(identity);
         this.name = name;
         this.type = type;
@@ -33,27 +36,27 @@ public class Card extends Entity<CardId> {
         };
     }
 
-    public String getName() {
+    public Name getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Name name) {
         this.name = name;
     }
 
-    public String getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
-    public String getAction() {
+    public Action getAction() {
         return action;
     }
 
-    public void setAction(String action) {
+    public void setAction(Action action) {
         this.action = action;
     }
 }

@@ -25,6 +25,7 @@ public class PlayerPhase extends AggregateRoot<PlayerPhaseId> {
 
     private PlayerPhase(PlayerPhaseId identity) {
         super(identity);
+        subscribe(new PlayerPhaseHandler(this));
     }
     //endregion
 
