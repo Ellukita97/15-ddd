@@ -12,10 +12,6 @@ public class ModifiedPoints extends DomainEvent {
         this.amountPoints = amountPoints;
     }
 
-    public String getId() {
-        return id;
-    }
-
     public int getAmountPoints() {
         return amountPoints;
     }

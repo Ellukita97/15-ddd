@@ -20,7 +20,7 @@ public class Place extends Entity<PlaceId> {
     }
 
     public void canGo(Type type, int diseaseLevel) {
-        if (diseaseLevel <= 3) {
+        if (diseaseLevel >= 3) {
             throw new Error("the disease level is very high, cant go");
         }else {
             this.type = type;

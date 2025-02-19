@@ -1,27 +1,36 @@
 package com.buildingblocks.actionsandshiftsmanager.domain.playerphase;
 
+import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.entities.Card;
+import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.entities.Player;
 import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.events.*;
+import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.values.Action;
+import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.values.AmountPoints;
+import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.values.Name;
+import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.values.Type;
 import com.buildingblocks.shared.domain.generic.DomainActionsContainer;
 
 public class PlayerPhaseHandler extends DomainActionsContainer {
     public PlayerPhaseHandler(PlayerPhase playerPhase) {
         add((AssignedPlayer event) -> {
-            playerPhase.assignedPlayer(event.getName());
+            Player player = new Player(Name.of(event.getName()));
+            playerPhase.setPlayer(player);
         });
         add((AssignedCard event) -> {
-            playerPhase.assignedCard(event.getName(), event.getType(), event.getEffect());
+            Card card = new Card(Name.of(event.getName()), Type.of(event.getType()), Action.of(event.getEffect()));
+            playerPhase.getCardList().add(card);
         });
         add((CalculatedPoints event) -> {
-            playerPhase.calculatedPoints(event.getAmountPoints());
+            playerPhase.setAmountPoints(AmountPoints.of(event.getAmountPoints()));
         });
         add((CardDeleted event) -> {
-            playerPhase.cardDeleted(event.getId(), event.getName(), event.getType(), event.getEffect());
+            playerPhase.getCardList().removeIf(card1 -> card1.getName().getName().equals(event.getName()));
         });
         add((ModifiedPoints event) -> {
-            playerPhase.modifiedPoints(event.getId(),event.getAmountPoints());
+            playerPhase.setAmountPoints(AmountPoints.of(event.getAmountPoints()));
         });
         add((PlayerChanged event) -> {
-            playerPhase.playerChanged(event.getId(),event.getName());
+            Player player = new Player(Name.of(event.getName()));
+            playerPhase.setPlayer(player);
         });
     }
 }

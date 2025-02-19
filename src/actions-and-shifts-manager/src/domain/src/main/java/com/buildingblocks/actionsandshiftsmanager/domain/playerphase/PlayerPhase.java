@@ -1,7 +1,5 @@
 package com.buildingblocks.actionsandshiftsmanager.domain.playerphase;
 
-import com.buildingblocks.actionsandshiftsmanager.domain.movement.events.ChosenPlace;
-import com.buildingblocks.actionsandshiftsmanager.domain.movement.values.MovementId;
 import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.entities.Card;
 import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.entities.Player;
 import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.events.*;
@@ -10,11 +8,12 @@ import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.values.Play
 import com.buildingblocks.shared.domain.generic.AggregateRoot;
 import com.buildingblocks.shared.domain.generic.DomainEvent;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerPhase extends AggregateRoot<PlayerPhaseId> {
     private Player player;
-    private List<Card> cardList;
+    private List<Card> cardList = new ArrayList<>();
     private AmountPoints amountPoints;
 
     //region Contructors
@@ -40,10 +39,6 @@ public class PlayerPhase extends AggregateRoot<PlayerPhaseId> {
 
     public List<Card> getCardList() {
         return cardList;
-    }
-
-    public void setCardList(List<Card> cardList) {
-        this.cardList = cardList;
     }
 
     public AmountPoints getAmountPoints() {

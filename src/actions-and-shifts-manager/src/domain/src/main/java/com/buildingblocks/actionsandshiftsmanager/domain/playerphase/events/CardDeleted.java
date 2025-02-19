@@ -16,10 +16,6 @@ public class CardDeleted extends DomainEvent {
         this.effect = effect;
     }
 
-    public String getId() {
-        return id;
-    }
-
     @Override
     public String getName() {
         return name;
