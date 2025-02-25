@@ -2,7 +2,7 @@ package com.buildingblocks.actionsandshiftsmanager.application.turnStart;
 
 import com.buildingblocks.actionsandshiftsmanager.application.shared.Card;
 import com.buildingblocks.actionsandshiftsmanager.application.shared.Points;
-import com.buildingblocks.actionsandshiftsmanager.application.shared.repositories.IEventsRepository;
+import com.buildingblocks.actionsandshiftsmanager.application.shared.ports.IEventsRepositoryPort;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import reactor.test.StepVerifier;
@@ -13,10 +13,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CreateTurnUseCaseTest {
     private final CreateTurnUseCase useCase;
-    private final IEventsRepository repository;
+    private final IEventsRepositoryPort repository;
 
     CreateTurnUseCaseTest() {
-        this.repository = Mockito.mock(IEventsRepository.class);
+        this.repository = Mockito.mock(IEventsRepositoryPort.class);
         this.useCase = new CreateTurnUseCase(repository);
     }
 

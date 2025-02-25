@@ -3,7 +3,7 @@ package com.buildingblocks.actionsandshiftsmanager.application.moveByCard;
 import com.buildingblocks.actionsandshiftsmanager.application.shared.Card;
 import com.buildingblocks.actionsandshiftsmanager.application.shared.MethodPerformed;
 import com.buildingblocks.actionsandshiftsmanager.application.shared.Points;
-import com.buildingblocks.actionsandshiftsmanager.application.shared.repositories.IEventsRepository;
+import com.buildingblocks.actionsandshiftsmanager.application.shared.ports.IEventsRepositoryPort;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import reactor.test.StepVerifier;
@@ -12,10 +12,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class MovementUseCaseTest {
     private final MovementUseCase useCase;
-    private final IEventsRepository repository;
+    private final IEventsRepositoryPort repository;
 
     MovementUseCaseTest() {
-        this.repository = Mockito.mock(IEventsRepository.class);
+        this.repository = Mockito.mock(IEventsRepositoryPort.class);
         this.useCase = new MovementUseCase(repository);
     }
 

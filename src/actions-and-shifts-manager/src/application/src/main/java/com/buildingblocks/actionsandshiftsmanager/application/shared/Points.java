@@ -16,4 +16,12 @@ public class Points {
     public Integer getAmountPoints() {
         return amountPoints;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setAmountPoints(Integer amountPoints) {
+        this.amountPoints = amountPoints;
+    }
 }

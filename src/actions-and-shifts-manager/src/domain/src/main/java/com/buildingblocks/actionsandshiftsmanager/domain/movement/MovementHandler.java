@@ -16,7 +16,7 @@ public class MovementHandler extends DomainActionsContainer {
             movement.setPlace(place);
         });
         add((ModifiedMethodPerformed event) -> {
-            MethodPerformed methodPerformed = new MethodPerformed(Name.of(event.getName()), Description.of(event.getDescription()));
+            MethodPerformed methodPerformed = new MethodPerformed(Name.of(event.getNameModifiedMethod()), Description.of(event.getDescription()));
             movement.setMethodPerformed(methodPerformed);
         });
     }

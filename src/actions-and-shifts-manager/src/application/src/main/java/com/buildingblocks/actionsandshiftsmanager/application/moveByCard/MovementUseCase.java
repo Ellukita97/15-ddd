@@ -1,16 +1,16 @@
 package com.buildingblocks.actionsandshiftsmanager.application.moveByCard;
 
 import com.buildingblocks.actionsandshiftsmanager.application.shared.MethodPerformed;
-import com.buildingblocks.actionsandshiftsmanager.application.shared.repositories.IEventsRepository;
+import com.buildingblocks.actionsandshiftsmanager.application.shared.ports.IEventsRepositoryPort;
 import com.buildingblocks.actionsandshiftsmanager.domain.movement.Movement;
 import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.PlayerPhase;
 import com.buildingblocks.shared.application.ICommandUseCase;
 import reactor.core.publisher.Mono;
 
 public class MovementUseCase implements ICommandUseCase<MovementRequest, Mono<MovementResponse>> {
-    private final IEventsRepository repository;
+    private final IEventsRepositoryPort repository;
 
-    public MovementUseCase(IEventsRepository repository) {
+    public MovementUseCase(IEventsRepositoryPort repository) {
         this.repository = repository;
     }
 
@@ -26,10 +26,13 @@ public class MovementUseCase implements ICommandUseCase<MovementRequest, Mono<Mo
 
         playerPhase.calculatedPoints(request.getPoints().getAmountPoints());
 
+        playerPhase.playerChanged(request.getNextPlayerId(), request.getNextPlayerName());
+
         playerPhase.getUncommittedEvents().forEach(repository::save);
         playerPhase.markEventsAsCommitted();
 
-        playerPhase.playerChanged(request.getNextPlayerId(), request.getNextPlayerName());
+        movement.getUncommittedEvents().forEach(repository::save);
+        movement.markEventsAsCommitted();
 
         return Mono.just(
                 new MovementResponse(

@@ -1,6 +1,6 @@
 package com.buildingblocks.actionsandshiftsmanager.application.turnStart;
 
-import com.buildingblocks.actionsandshiftsmanager.application.shared.repositories.IEventsRepository;
+import com.buildingblocks.actionsandshiftsmanager.application.shared.ports.IEventsRepositoryPort;
 import com.buildingblocks.actionsandshiftsmanager.application.shared.Card;
 import com.buildingblocks.actionsandshiftsmanager.domain.playerphase.PlayerPhase;
 import com.buildingblocks.shared.application.ICommandUseCase;
@@ -8,9 +8,9 @@ import reactor.core.publisher.Mono;
 
 public class CreateTurnUseCase implements ICommandUseCase<CreateTurnRequest, Mono<CreateTurnResponse>> {
 
-    private final IEventsRepository repository;
+    private final IEventsRepositoryPort repository;
 
-    public CreateTurnUseCase(IEventsRepository repository) {
+    public CreateTurnUseCase(IEventsRepositoryPort repository) {
         this.repository = repository;
     }
 
@@ -22,10 +22,10 @@ public class CreateTurnUseCase implements ICommandUseCase<CreateTurnRequest, Mon
         playerPhase.assignedCard(request.getCard().getName(), request.getCard().getType(), request.getCard().getAction());
         Card card = new Card(request.getCard().getName(), request.getCard().getType(), request.getCard().getAction());
 
+        playerPhase.modifiedPoints(request.getPoints().getId(), request.getPoints().getAmountPoints());
+
         playerPhase.getUncommittedEvents().forEach(repository::save);
         playerPhase.markEventsAsCommitted();
-
-        playerPhase.modifiedPoints(request.getPoints().getId(), request.getPoints().getAmountPoints());
 
         return Mono.just(
                 new CreateTurnResponse(

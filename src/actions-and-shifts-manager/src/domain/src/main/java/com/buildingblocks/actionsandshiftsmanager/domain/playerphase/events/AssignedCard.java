@@ -3,9 +3,9 @@ package com.buildingblocks.actionsandshiftsmanager.domain.playerphase.events;
 import com.buildingblocks.shared.domain.generic.DomainEvent;
 
 public class AssignedCard extends DomainEvent {
-    private final String name;
-    private final String type;
-    private final String effect;
+    private String name;
+    private String type;
+    private String effect;
 
     public AssignedCard(String name, String type, String effect) {
         super(EventsEnum.ASSIGNED_CARD.name());
@@ -14,7 +14,6 @@ public class AssignedCard extends DomainEvent {
         this.effect = effect;
     }
 
-    @Override
     public String getName() {
         return name;
     }
@@ -26,4 +25,17 @@ public class AssignedCard extends DomainEvent {
     public String getEffect() {
         return effect;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setEffect(String effect) {
+        this.effect = effect;
+    }
+
 }

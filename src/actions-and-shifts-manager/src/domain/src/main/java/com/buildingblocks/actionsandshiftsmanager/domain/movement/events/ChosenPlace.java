@@ -3,7 +3,7 @@ package com.buildingblocks.actionsandshiftsmanager.domain.movement.events;
 import com.buildingblocks.shared.domain.generic.DomainEvent;
 
 public class ChosenPlace extends DomainEvent {
-    private final String type;
+    private String type;
 
     public ChosenPlace(String type) {
         super(EventsEnum.CHOSEN_PLACE.name());
@@ -12,5 +12,9 @@ public class ChosenPlace extends DomainEvent {
 
     public String getType() {
         return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

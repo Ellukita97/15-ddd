@@ -1,9 +1,9 @@
 package com.buildingblocks.actionsandshiftsmanager.application.shared;
 
 public class MethodPerformed {
-    private final String id;
-    private final String name;
-    private final String description;
+    private String id;
+    private String name;
+    private String description;
 
     public MethodPerformed(String id, String name, String description) {
         this.id = id;
@@ -21,5 +21,17 @@ public class MethodPerformed {
 
     public String getDescription() {
         return description;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

@@ -4,19 +4,17 @@ import java.time.Instant;
 import java.util.UUID;
 
 public class DomainEvent {
-
-    private final Instant when;
-    private final String uuid;
-    private final String name;
+    private Instant when;
+    private String uuid;
+    private String nameDomainEvent;
     private String aggregateRootId;
     private String aggregateName;
     private Long version;
 
-
-    public DomainEvent(String name) {
+    protected DomainEvent(String nameDomainEvent) {
         this.when = Instant.now();
         this.uuid = UUID.randomUUID().toString();
-        this.name = name;
+        this.nameDomainEvent = nameDomainEvent;
         this.version = 1L;
     }
 
@@ -28,8 +26,8 @@ public class DomainEvent {
         return uuid;
     }
 
-    public String getName() {
-        return name;
+    public String getEventName() {
+        return nameDomainEvent;
     }
 
     public String getAggregateRootId() {
@@ -54,5 +52,17 @@ public class DomainEvent {
 
     public void setVersion(Long version) {
         this.version = version;
+    }
+
+    public void setWhen(Instant when) {
+        this.when = when;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
+
+    public void setEventName(String tableName) {
+        this.nameDomainEvent = tableName;
     }
 }
